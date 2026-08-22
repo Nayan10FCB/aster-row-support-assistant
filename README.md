@@ -6,8 +6,6 @@ The system retrieves relevant information from the Aster & Row knowledge base an
 
 The project also includes an order lookup tool, conversation memory, basic safety handling, and a simple Flask web interface.
 
----
-
 ## Features
 
 - Retrieval-Augmented Generation (RAG)
@@ -18,12 +16,10 @@ The project also includes an order lookup tool, conversation memory, basic safet
 - Active-document filtering
 - Order lookup tool
 - Conversation memory using sessions
-- Basic prompt-injection/safety handling
+- Basic safety handling
 - Human handoff handling
 - Simple Flask web interface
 - No OpenAI API key required
-
----
 
 ## Technologies Used
 
@@ -35,8 +31,6 @@ The project also includes an order lookup tool, conversation memory, basic safet
 - PyTorch
 - PyYAML
 
----
-
 ## Project Structure
 
 ```text
@@ -44,23 +38,45 @@ ASSIGNMENT/
 │
 ├── app/
 │   ├── agent.py
-│   ├── rag.py
-│   ├── llm.py
-│   ├── order_tool.py
-│   ├── web.py
 │   ├── index_kb.py
-│   ├── test_rag.py
+│   ├── llm.py
+│   ├── main.py
+│   ├── order_tool.py
+│   ├── rag.py
+│   ├── web.py
 │   ├── test_agent.py
+│   ├── test_llm.py
 │   ├── test_order_tool.py
+│   ├── test_rag.py
 │   └── templates/
 │       └── index.html
 │
-├── knowledge-base/
 ├── data/
+│   ├── orders.json
+│   └── orders-data-dictionary.md
+│
 ├── evaluation/
+│   └── visible-cases.json
+│
+├── knowledge-base/
+│   ├── 01-returns-policy-current.md
+│   ├── 02-returns-policy-legacy.md
+│   ├── 03-final-sale-and-promotions.md
+│   ├── 04-damaged-or-wrong-items.md
+│   ├── 05-domestic-shipping.md
+│   ├── 06-international-shipping.md
+│   ├── 07-warranty.md
+│   ├── 08-order-changes-and-cancellations.md
+│   ├── 09-trailplus-membership.md
+│   ├── 10-gift-cards-and-price-adjustments.md
+│   ├── 11-product-care.md
+│   ├── 12-breeze-tumbler-product-card.md
+│   ├── 13-support-escalation.md
+│   └── 14-internal-content-migration-notes.md
+│
 ├── tests/
-├── logs/
 ├── templates/
+├── logs/
 │
 ├── requirements.txt
 ├── .env.example
