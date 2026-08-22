@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Aster & Row Support</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            resize: vertical;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 12px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #222;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .answer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-left: 4px solid #222;
+            border-radius: 5px;
+        }
+
+        .sources {
+            margin-top: 20px;
+        }
+
+        .sources li {
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>Aster & Row Support Assistant</h1>
+
+    <p class="subtitle">
+        Ask a question about returns, shipping,
+        warranty, membership, or your order.
+    </p>
+
+
+    <form method="POST">
+
+        <textarea
+            name="question"
+            placeholder="Example: What is the standard return window?"
+            required
+        >{{ question }}</textarea>
+
+        <br>
+
+        <button type="submit">
+            Ask Assistant
+        </button>
+
+    </form>
+
+
+    {% if answer %}
+
+        <div class="answer">
+
+            <h2>Assistant</h2>
+
+            <p>
+                {{ answer }}
+            </p>
+
+        </div>
+
+
+        {% if sources %}
+
+            <div class="sources">
+
+                <h3>Sources</h3>
+
+                <ul>
+
+                    {% for source in sources %}
+
+                        <li>{{ source }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
