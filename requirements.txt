@@ -1,6 +1,7 @@
-flask
-chromadb
-sentence-transformers
+python-dotenv
 transformers
 torch
-pyyaml
+sentence-transformers
+chromadb
+pytest
+huggingface-hub

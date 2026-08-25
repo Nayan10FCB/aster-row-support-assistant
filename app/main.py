@@ -1,78 +1,50 @@
-from flask import Flask, render_template, request, jsonify
-
-from agent import SupportAgent
+from app.agent import SupportAgent
 
 
-app = Flask(
-    __name__,
-    template_folder="../templates"
-)
+def main():
+    print("=" * 70)
+    print("ASTER & ROW SUPPORT ASSISTANT")
+    print("Type 'exit' or 'quit' to stop.")
+    print("=" * 70)
 
+    agent = SupportAgent()
 
-agent = SupportAgent()
+    session_id = "terminal-session"
 
+    while True:
+        try:
+            question = input("\nCUSTOMER: ").strip()
 
-@app.route("/")
-def home():
+            if question.lower() in {"exit", "quit"}:
+                print("\nGoodbye!")
+                break
 
-    return render_template(
-        "index.html"
-    )
+            if not question:
+                print("Please enter a question.")
+                continue
 
+            result = agent.answer(
+                question,
+                session_id=session_id
+            )
 
-@app.route(
-    "/chat",
-    methods=["POST"]
-)
-def chat():
+            print("\nASSISTANT:")
+            print(result.get("response", ""))
 
-    data = request.get_json()
+            sources = result.get("sources", [])
 
-    if not data:
+            if sources:
+                print("\nSOURCES:")
+                for source in sources:
+                    print(f"- {source}")
 
-        return jsonify({
-            "response": "Please enter a question.",
-            "sources": []
-        })
+        except KeyboardInterrupt:
+            print("\n\nGoodbye!")
+            break
 
-    message = data.get(
-        "message",
-        ""
-    ).strip()
-
-    if not message:
-
-        return jsonify({
-            "response": "Please enter a question.",
-            "sources": []
-        })
-
-    try:
-
-        result = agent.answer(
-            message,
-            session_id="web-session"
-        )
-
-        return jsonify(result)
-
-    except Exception as error:
-
-        print("ERROR:", error)
-
-        return jsonify({
-            "response": (
-                "Sorry, something went wrong "
-                "while processing your request."
-            ),
-            "sources": []
-        }), 500
+        except Exception as error:
+            print(f"\nERROR: {error}")
 
 
 if __name__ == "__main__":
-
-    app.run(
-        host="127.0.0.1",
-        port=5000,
-        debug=False
-    )
+    main()

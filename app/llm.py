@@ -26,15 +26,13 @@ class LocalLLM:
 
         self.model.to(self.device)
 
-        print(
-            f"Local LLM loaded on {self.device}"
-        )
+        print(f"Local LLM loaded on {self.device}")
 
     def generate(
         self,
         system_prompt: str,
         user_prompt: str,
-        max_new_tokens: int = 200
+        max_new_tokens: int = 80
     ):
 
         messages = [
@@ -60,11 +58,11 @@ class LocalLLM:
         ).to(self.device)
 
         with torch.no_grad():
-
             output = self.model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=False,
+                use_cache=True,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
 
